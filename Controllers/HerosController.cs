@@ -79,10 +79,12 @@ namespace HeroAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Hero>> PostHero(Hero hero)
         {
+            hero.CreatedOn = DateTime.UtcNow;
+            hero.LastModifiedOn = DateTime.UtcNow;
             _context.Heros.Add(hero);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction( nameof(GetHero), new { id = hero.Id }, hero);
+            return CreatedAtAction(nameof(GetHero), new { id = hero.Id }, hero);
         }
 
         // DELETE: api/Heros/5
