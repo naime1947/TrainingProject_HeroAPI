@@ -29,6 +29,12 @@ namespace HeroAPI
         {
             services.AddDbContextPool<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("HeroDb")));
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+                        {
+                            builder.AllowAnyOrigin()
+                                .AllowAnyMethod()
+                                .AllowAnyHeader();
+                        }));
             services.AddControllers();
         }
 
@@ -39,6 +45,8 @@ namespace HeroAPI
             {
                 app.UseDeveloperExceptionPage();
             }
+            
+            app.UseCors("MyPolicy");
 
             app.UseHttpsRedirection();
 
