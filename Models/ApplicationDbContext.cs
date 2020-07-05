@@ -10,6 +10,6 @@ namespace HeroAPI.Models{
             
         }
 
-        DbSet<Hero> Heros {get;set;}
+        public DbSet<Hero> Heros {get;set;}
     }
 }
